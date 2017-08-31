@@ -23,13 +23,21 @@
                 <label name='slug'>Slug:</label>
                 <input id='slug' name="slug" class="form-control" required minlength='5' maxlength='255'>
             </div>
+            <div class="form-group">
+                <label name='category_id'>Category:</label>
+                <select class="form-control" name='category_id'>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class='form-group'>
                 <label name='body'>Post Body:</label>
                 <textarea id='body' name='body' rows='10' class='form-control' required></textarea>
             </div>
             <input type='submit' value='Create Post' class='btn btn-success btn-lg btn-block'>
             <input type='hidden' name='_token' value='{{ Session::token() }}'>
-      </form>
+        </form>
       </div>
  </div>
 

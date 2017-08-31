@@ -8,12 +8,20 @@
         <div class="col-md-8">
             <form method="POST" action="{{ route('posts.update', $post->id) }}">
                 <div class="form-group">
-                    <label for="title">Title:</label>
+                    <label name="title">Title:</label>
                     <textarea type="text" class="form-control input-lg" id="title" name="title" rows="1" style="resize:none;">{{ $post->title }}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="slug">Url:</label>
+                    <label name="slug">Url:</label>
                     <textarea type="text" class="form-control input-lg" id="slug" name="slug" rows="1" style="resize:none;">{{ $post->slug }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label name='category_id'>Category:</label>
+                    <select class="form-control" name='category_id'>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="body">Body:</label>

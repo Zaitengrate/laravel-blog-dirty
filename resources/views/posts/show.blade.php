@@ -20,6 +20,9 @@
                     <dt>Last updated:</dt>
                     <dd>{{ date('j F, Y. G:i', strtotime($post->created_at)) }}</dd>
 
+                    <dt>Category:</dt>
+                    <dd>{{ $post->category->name }}</dd>
+
                     <dt>Url:</dt>
                     <dd><a href="{{ route('blog.single', $post->slug) }}">{{ route('blog.single', $post->slug) }}</dd>
                 </dl>
