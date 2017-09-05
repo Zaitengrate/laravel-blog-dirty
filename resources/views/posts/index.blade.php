@@ -34,7 +34,7 @@
                         <tr>
                             <th>{{ $post->id }}</th>
                             <td>{{ $post->title }}</td>
-                            <td>{{ str_limit($post->body, $limit = 50, $end = '...') }}</td>
+                            <td>{{ str_limit(strip_tags($post->body), $limit = 50, $end = '...') }}</td>
                             <td>{{ date('j F, Y. G:i', strtotime($post->created_at)) }}</td>
                             <td><a href="{{ route('posts.show', $post->id)}}" class="btn btn-default btn-sm">View</a>
                                 <a href="{{ route('posts.edit', $post->id)}}" class="btn btn-default btn-sm">Edit</td>

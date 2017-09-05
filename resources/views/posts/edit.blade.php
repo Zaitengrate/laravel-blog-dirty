@@ -5,6 +5,15 @@
 @section('assets')
 
     <link rel='stylesheet' href='/css/select2.min.css'>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'link',
+            menubar: false
+        });
+    </script>
 
 @endsection
 
@@ -15,11 +24,11 @@
             <form method="POST" action="{{ route('posts.update', $post->id) }}">
                 <div class="form-group">
                     <label name="title">Title:</label>
-                    <textarea type="text" class="form-control input-lg" id="title" name="title" rows="1" style="resize:none;">{{ $post->title }}</textarea>
+                    <input  class="form-control input-lg" id="title" name="title" rows="1" style="resize:none;" value="{{ $post->title }}">
                 </div>
                 <div class="form-group">
                     <label name="slug">Url:</label>
-                    <textarea type="text" class="form-control input-lg" id="slug" name="slug" rows="1" style="resize:none;">{{ $post->slug }}</textarea>
+                    <input  class="form-control input-lg" id="slug" name="slug" rows="1" style="resize:none;" value="{{ $post->slug }}">
                 </div>
                 <div class="form-group">
                     <label name='category_id'>Category:</label>

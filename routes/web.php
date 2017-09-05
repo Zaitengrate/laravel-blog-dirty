@@ -15,6 +15,7 @@ Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getS
 Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
 
 Route::get('contact', 'PagesController@getContact');
+Route::post('contact', 'PagesController@postContact');
 Route::get('about', 'PagesController@getAbout');
 Route::get('/', 'PagesController@getIndex');
 
@@ -33,3 +34,10 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
 
 Route::resource('tags', 'TagController', ['except' => ['create']]);
+
+//Route::post('comments/{post_id}', ['uses' => 'CommentsController@store', 'as' => 'comments.store']);
+Route::post('comments/{post_id}', 'CommentsController@store')->name('comments.store');
+Route::get('comments/{id}/edit', 'CommentsController@edit')->name('comments.edit');
+Route::put('comments/{id}', 'CommentsController@update')->name('comments.update');
+Route::delete('comments/{id}', 'CommentsController@destroy')->name('comments.destroy');
+Route::get('comments/{id}/delete', 'CommentsController@delete')->name('comments.delete');
