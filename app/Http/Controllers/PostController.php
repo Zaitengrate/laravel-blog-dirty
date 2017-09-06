@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Tag;
+use Mews\Purifier\Purifier;
 use Session;
+//use Images;﻿
 
 class PostController extends Controller
 {
@@ -60,8 +63,18 @@ class PostController extends Controller
 
         $post->title = $request->title;
         $post->slug = $request->slug;
-        $post->body = $request->body;
+        $post->body = clean($request->body);
         $post->category_id = $request->category_id;
+
+        //saving image
+        if ($request->hasFile('featured_img')) {
+            $image = $request->file('featured_img');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images' . $filename);
+            Images::make($image)->resize(800, 400)->save($location);
+
+            $post->image = $filename;
+        }
 
         $post->save();
 
@@ -133,7 +146,7 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
-        $post->body = $request->input('body');
+        $post->body = clean($request->input('body'));
         $post->category_id = $request->input('category_id');
 
 
